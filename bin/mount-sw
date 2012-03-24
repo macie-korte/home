@@ -1,0 +1,18 @@
+#!/bin/sh
+
+iptables -A INPUT -p tcp --dport 5984 -j ACCEPT
+
+iptables -A INPUT -p tcp --dport 137 -j ACCEPT
+iptables -A INPUT -p udp --dport 137 -j ACCEPT
+iptables -A INPUT -p tcp --dport 138 -j ACCEPT
+iptables -A INPUT -p udp --dport 138 -j ACCEPT
+iptables -A INPUT -p tcp --dport 139 -j ACCEPT
+iptables -A INPUT -p udp --dport 139 -j ACCEPT
+iptables -A INPUT -p tcp --dport 445 -j ACCEPT
+iptables -A INPUT -p udp --dport 445 -j ACCEPT
+
+mkdir -p /var/run/samba
+/usr/sbin/nmbd -D
+/usr/sbin/smbd -D
+
+exit 0
